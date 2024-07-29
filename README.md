@@ -45,7 +45,7 @@ The application uses sessions to associate the user with their uploaded file.
 On the frontend, the user enters a username along with the ECG file upload. The username is stored as a session variable, which can then be utilized by the `compress` and `download` endpoints to find the user's file.
 
 ECG files are stored in the `/uploads` directory, which will contain a subdirectory for each user.
-
+The application will check if these directories exist and create them if they don't.
 
 Subdirectories are named using `session['username']` as provided by the user.
 
