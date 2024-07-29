@@ -18,7 +18,6 @@ def read_compressed_file(input_path):
 
 
 def remove_padding(padded_data):
-    padding_length = padded_data[0]
     return padded_data[1:]
 
 

@@ -142,8 +142,6 @@ def compress_file(input_path, output_path):
     compressed_size = len(padded_data) + sum(len(code) for code in codes.values()) // 8 + 2
     compression_ratio = (1 - compressed_size / original_size) * 100
 
-    # Return compression metadata so that we can render it in a template
-    # todo: return the metadata in a more structured format
-    return (f"Original size: {original_size} bytes <br>"
-            f"Compressed size: {compressed_size} bytes <br>"
-            f"Compression ratio: {compression_ratio:.2f}%")
+    # Return compression results metadata
+    return original_size, compressed_size, compression_ratio
+

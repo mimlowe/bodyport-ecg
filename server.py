@@ -15,8 +15,6 @@ def create_app():
     app.config['UPLOAD_FOLDER'] = './uploads'
     app.config['ALLOWED_EXTENSIONS'] = {'bin'}
 
-    print(app.config['SECRET_KEY'])
-
     # Register blueprint to handle ECG functionality
     from ecg import ecg_controller
     app.register_blueprint(ecg_controller.bp)

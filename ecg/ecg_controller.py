@@ -31,7 +31,7 @@ def download_file(filename):
 @bp.route('/compress/<filename>', methods=['POST'])
 def compress(filename):
     """
-    Endpoint to compress an uploaded file
+    Endpoint to compress an existing file
     :param filename:
     :return:
     """
@@ -45,11 +45,13 @@ def compress(filename):
         compressed_path = f'{current_app.config['UPLOAD_FOLDER']}/{username}/{filename}'
 
         # Perform the compression and retrieve metadata
-        metadata = compress_file(compressed_path, compressed_path)
+        original_size, compressed_size, compression_ratio = compress_file(compressed_path, compressed_path)
 
-        return (f'File {filename} compressed successfully! <br><hr>'
-                f'{metadata}<br><hr>'
-                f'<a href="/ecg/download/{filename}">Download compressed file</a>')
+        return render_template('result.html',
+                               filename=filename,
+                               original_size=original_size,
+                               compressed_size=compressed_size,
+                               compression_ratio=f"{compression_ratio:.2f}%")
 
     return 'File not found!'
 
