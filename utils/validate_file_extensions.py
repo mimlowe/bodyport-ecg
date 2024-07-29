@@ -1,9 +1,9 @@
 from flask import current_app
 
 
-def allowed_file(filename):
+def validate(filename):
     """
-    This function validates the extension of a file name, checking if it is an allowed type
+    This function validates the extension of a file name, checking if the current Flask app allows it.
     :param filename: String name of file to validate
     :return: Boolean
     """
