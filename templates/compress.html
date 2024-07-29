@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h2>ECG File Compression</h2>
+    <h2>ECG File Compression</h2>
 
-<form action="/ecg" method="post" enctype="multipart/form-data">
-    <label for="name">Username:</label> <br>
-    <input type="text" id="name" name="name" value="{{username}}"> <br><br>
-    <label for="file">File:</label> <br>
-    <input type="file" name="file" id="file"> <br><br>
-    <input type="submit" value="Compress">
-</form>
+    <form action="{{url}}" method="post" enctype="multipart/form-data">
+        {% if username %}
+            <p>{{username}}, your file was uploaded successfully.</p>
+        {% endif %}
+
+        <input type="submit" value="Compress {{filename}}">
+    </form>
 </body>
 </html>

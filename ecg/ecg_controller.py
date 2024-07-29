@@ -28,8 +28,34 @@ def download_file(filename):
     return 'File not found!'
 
 
+@bp.route('/compress/<filename>', methods=['POST'])
+def compress(filename):
+    """
+    Endpoint to compress an uploaded file
+    :param filename:
+    :return:
+    """
+
+    # Retrieve the username from the session, we need to use this to locate the file
+    username = session.get('username', None)
+
+    # Check if the username is valid and if the path exists
+    if username is not None and os.path.isdir(f'{current_app.config['UPLOAD_FOLDER']}/{username}/'):
+
+        compressed_path = f'{current_app.config['UPLOAD_FOLDER']}/{username}/{filename}'
+
+        # Perform the compression and retrieve metadata
+        metadata = compress_file(compressed_path, compressed_path)
+
+        return (f'File {filename} compressed successfully! <br><hr>'
+                f'{metadata}<br><hr>'
+                f'<a href="/ecg/download/{filename}">Download compressed file</a>')
+
+    return 'File not found!'
+
+
 @bp.route('/', methods=['GET', 'POST'])
-def compress():
+def upload_file():
     """
     Endpoint to upload and compress ECG data
     :return:
@@ -62,13 +88,11 @@ def compress():
 
             # Save the file in the user's directory, we'll later overwrite the file with the compressed data
             file.save(os.path.join(f'{current_app.config['UPLOAD_FOLDER']}/{username}/', filename))
-            compressed_path = f'{current_app.config['UPLOAD_FOLDER']}/{username}/{filename}'
 
-            # Perform the compression and retrieve metadata
-            metadata = compress_file(compressed_path, compressed_path)
+            # Render the compress template with the username and filename
+            return render_template('compress.html',
+                                   username=session.get('username', ''),
+                                   filename=filename,
+                                   url=f'/ecg/compress/{filename}')
 
-            return (f'File {filename} uploaded successfully! <br><hr>'
-                    f'{metadata}<br><hr>'
-                    f'<a href="/ecg/download/{filename}">Download compressed file</a>')
-
-    return render_template('compress.html', username=session.get('username', ''))
+    return render_template('upload.html', username=session.get('username', ''))
