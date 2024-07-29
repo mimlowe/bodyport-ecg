@@ -5,7 +5,7 @@ from ecg.compression.decompress_ecg import decompress_file
 # Original File
 input_file = '../sample_ecg_raw.bin'
 # Compressed File
-compressed_file = 'compressed.bin'
+compressed_file = './compressed.bin'
 # Decompressed File Path
 decompressed_file = './decompressed.bin'
 
