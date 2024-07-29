@@ -47,4 +47,4 @@ def compress_file():
     if 'username' in session:
         print(f'Logged in as {session["username"]}')
 
-    return render_template('compress.html')
+    return render_template('compress.html', username=session.get('username', None))
