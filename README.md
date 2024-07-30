@@ -10,14 +10,18 @@ The project source is available on [GitHub](https://github.com/mimlowe/bodyport-
 
 The application is a Flask app that can be run using the following steps:
 1. Navigate to the project root.
-2. Install the dependencies using `pip install -r requirements.txt`.
-3. Run the app using `flask --app server run`.
-4. Open a browser and navigate to [`http://127.0.0.1:5000/ecg`](http://127.0.0.1:5000/ecg)
-5. Enter a username for the session and select a file to upload:
+2. Create a virtual environment using `python -m venv <name>`.
+3. Activate the virtual environment.
+   1. On Windows: `<name>\Scripts\activate`
+   2. On Linux/Mac: `source <name>/bin/activate`
+4. Install the dependencies using `pip install -r requirements.txt`.
+5. Run the app using `flask --app server run`.
+6. Open a browser and navigate to [`http://127.0.0.1:5000/ecg`](http://127.0.0.1:5000/ecg)
+7. Enter a username for the session and select a file to upload:
    1. The file should be a binary file containing 4095 samples of Signed Int 24 bit values (3 bytes each).
    2. Click the `Upload` button to initiate file upload. 
-6. Upon successful upload, click `Compress` to compress the uploaded file.
-7. The app will display the original file size, compressed file size, and compression ratio along with a download button.
+8. Upon successful upload, click `Compress` to compress the uploaded file.
+9. The app will display the original file size, compressed file size, and compression ratio along with a download button.
 
 ## Design Considerations and Key Decisions
 
