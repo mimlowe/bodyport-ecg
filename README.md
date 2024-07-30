@@ -31,8 +31,8 @@ The main app is in `server.py`, which uses Flask's factory pattern to create the
 
 The app contains one root endpoint `/` which contains a link to the `/ecg` features.
 
-The app contains the following blueprints:
-1. `/ecg` - handles the ECG file upload, compression, and download
+The app uses blueprints to separate feature functionality:
+1. `/ecg` - Blueprint which handles the ECG file upload, compression, and download
 
 ---
 #### ECG Controller (url-prefix: `/ecg`)
@@ -44,9 +44,11 @@ The ECG controller contains the following routes:
 
 ### User Sessions & File Upload Destinations
 
-The application uses sessions to associate the user with their uploaded file.
+The application uses sessions to associate the user with their uploaded file. 
+This allows the application to store the uploaded file in a directory specific to the user which minimizes the risk of file collisions.
 
-On the frontend, the user enters a username along with the ECG file upload. The username is stored as a session variable, which can then be utilized by the `compress` and `download` endpoints to find the user's file.
+On the frontend, the user enters a username along with the ECG file upload. 
+The username is stored as a session variable, which can then be utilized by the `compress` and `download` endpoints to find the user's file.
 
 ECG files are stored in the `/uploads` directory, which will contain a subdirectory for each user.
 The application will check if these directories exist and create them if they don't.
